@@ -1,0 +1,6 @@
+Short form words:
+IF = Input file
+OF = Output file
+IFP = input file path
+OFP = output file path
+CW = consecutive word

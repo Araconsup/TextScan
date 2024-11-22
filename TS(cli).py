@@ -4,6 +4,7 @@ class TextAnalytics:
         self.Checked = False
         self.Data = {"IFP" : IFP ,"OFP" : OFP ,"IWFP" : IWFP};
         self.CW = CW
+        self.IgnoreFileEmpty = False
         if self.Checked is False:
             self.Check()
     def Check(self):
@@ -12,7 +13,7 @@ class TextAnalytics:
             open(self.Data["IFP"],"r")
             open(self.Data["OFP"],"r")
             if self.Data["IWFP"] == "":
-                pass
+                self.IgnoreFileEmpty = True
             else:
                 open(self.Data["IWFP"],"r")
         except FileNotFoundError as i:
@@ -22,3 +23,12 @@ class TextAnalytics:
                     break
             self.Data[Errorpath] = input(f"the {Errorpath} is incorrect. please rewrite the path: ")
             self.Check()
+    def IgnoreWords(self):
+        if self.IgnoreFileEmpty is not True:
+            with open(self.Data["IWFP"], "r") as IW:
+                self.IgnoreWords = IW.read().split(" ")
+
+            
+
+
+        

@@ -1,4 +1,4 @@
-from os import pathsep
+import json
 class TextAnalytics:
     def __init__(self,IFP=str,OFP=str,IWFP="",CW=1):
         self.Checked = False
@@ -41,7 +41,9 @@ class TextAnalytics:
             for j in self.IgnoreWords.split(" "):
                 if i == j:
                     self.SimilarWords += 1
-
+    def Output(self):
+        with open(self.Data["OFP","w+"]):
+            json.dump(self.OutputText,self.SimilarWords,indent=3)
     def Analyzer(self):
         with open(self.Data["IFP"],"r") as IF:
             self.InputText = IF.read()

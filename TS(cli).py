@@ -2,9 +2,11 @@ from os import pathsep
 class TextAnalytics:
     def __init__(self,IFP=str,OFP=str,IWFP="",CW=1):
         self.Checked = False
+        self.IgnoreFileEmpty = False
         self.Data = {"IFP" : IFP ,"OFP" : OFP ,"IWFP" : IWFP};
         self.CW = CW
-        self.IgnoreFileEmpty = False
+        self.InputText = ""
+        self.OutputText = ""
         if self.Checked is False:
             self.Check()
     def Check(self):
@@ -30,15 +32,21 @@ class TextAnalytics:
     def ConsecutiveWords(self):
         for i in range(0,len(self.InputText),self.CW):
             j = i+(i+self.CW)
-            tmp = self.InputText.split(" ")
-            tmp[i].join(tmp[j])
+            tmp = list(set(self.IgnoreWords.extend(self.InputText.split(" "))))
+            self.OutputText += tmp[i].join(tmp[j])
             continue
+    def Similarity(self):
+        self.SimilarWords = 0
+        for i in self.IgnoreWords.split(" "):
+            for j in self.IgnoreWords.split(" "):
+                if i == j:
+                    self.SimilarWords += 1
+
     def Analyzer(self):
         with open(self.Data["IFP"],"r") as IF:
-            self.InputText = IF
-            self.IgnoreWord()
-            self.ConsecutiveWords()
-
+            self.InputText = IF.read()
+        self.IgnoreWord()
+        self.ConsecutiveWords()
             
 
 
